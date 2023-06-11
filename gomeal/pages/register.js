@@ -16,6 +16,7 @@ import axios from 'axios';
 import jsCookie from 'js-cookie';
 import { useRouter } from 'next/router';
 import { Store } from '../utils/Store';
+import { getError } from '../utils/error';
 
 export default function RegisterScreen() {
     const { state, dispatch } = useContext(Store);
@@ -46,12 +47,11 @@ export default function RegisterScreen() {
                 email,
                 password,
             });
-            console.log("i was here")
             dispatch({ type: 'USER_LOGIN', payload: data });
             jsCookie.set('userInfo', JSON.stringify(data));
             router.push('/');
         } catch (err) {
-            enqueueSnackbar(err.message, { variant: 'error' });
+            enqueueSnackbar(getError(err), { variant: 'error' });
         }
     };
     return (
