@@ -12,7 +12,7 @@ handler.post(async (req, res) => {
     const dataset = config.dataset;
     const tokenWithWriteAccess = process.env.SANITY_AUTH_TOKEN;
     const { data } = await axios.post(
-        `https://${projectId}.api.sanity.io/v1/data/mutate/${dataset}?returnIds=true`,
+        `https://${projectId}.api.sanity.io/v2022-04-29/data/mutate/${dataset}?returnIds=true`,
         {
             mutations: [
                 {
