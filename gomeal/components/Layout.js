@@ -78,6 +78,8 @@ export default function Layout({ title, description, children }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const loginMenuCloseHandler = (e, redirect) => {
     setAnchorEl(null);
+    if (redirect && redirect == "backdropClick") 
+        return;
     if (redirect) {
       router.push(redirect);
     }
