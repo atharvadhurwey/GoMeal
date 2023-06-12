@@ -76,6 +76,8 @@ export default function Layout({ title, description, children }) {
     dispatch({ type: 'USER_LOGOUT' });
     jsCookie.remove('userInfo');
     jsCookie.remove('cartItems');
+    jsCookie.remove('shippingAddress');
+    jsCookie.remove('paymentMethod');
     router.push('/');
   };
   return (
