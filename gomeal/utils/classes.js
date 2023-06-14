@@ -15,9 +15,9 @@ const classes = {
     textAlign: 'center',
   },
   appbar: {
-    backgroundColor: '#203040',
+    backgroundColor: '#1a4d2e',
     '& a': {
-      color: '#ffffff',
+      color: '#faf3e3',
       marginLeft: 1,
     },
   },
@@ -29,6 +29,7 @@ const classes = {
     fontSize: '1.5rem',
   },
   navbarButton: {
+    padding: 0,
     color: '#ffffff',
     textTransform: 'initial',
   },
@@ -47,21 +48,24 @@ const classes = {
   // search
 
   searchForm: {
+    marginLeft: 5,
     border: '1px solid #ffffff',
     backgroundColor: '#ffffff',
     borderRadius: 1,
   },
   searchInput: {
-    paddingLeft: 1,
+    marginRight: 2,
+    // paddingLeft: 1,
     color: '#000000',
     '& ::placeholder': {
       color: '#606060',
     },
   },
   searchButton: {
-    backgroundColor: '#f8c040',
-    padding: 1,
-    borderRadius: '0 5px 5px 0',
+    pointerEvents: 'none',
+    // backgroundColor: '#f8c040',
+    paddingLeft: 2,
+    // borderRadius: '0 5px 5px 0',
     '& span': {
       color: '#000000',
     },

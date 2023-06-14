@@ -13,6 +13,7 @@ import {
   Link,
   List,
   ListItem,
+  ListItemIcon,
   ListItemText,
   Menu,
   MenuItem,
@@ -25,6 +26,11 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import CancelIcon from '@mui/icons-material/Cancel';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import Head from 'next/head';
 import NextLink from 'next/link';
 import classes from '../utils/classes';
@@ -78,8 +84,8 @@ export default function Layout({ title, description, children }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const loginMenuCloseHandler = (e, redirect) => {
     setAnchorEl(null);
-    if (redirect && redirect == "backdropClick") 
-        return;
+    if (redirect && redirect == "backdropClick")
+      return;
     if (redirect) {
       router.push(redirect);
     }
@@ -130,6 +136,11 @@ export default function Layout({ title, description, children }) {
     router.push(`/search?query=${query}`);
   };
 
+  try {
+    console.log(userInfo.isAdmin)
+  } catch (error) {
+    console.log(error)
+  }
   return (
     <>
       <Head>
@@ -139,7 +150,7 @@ export default function Layout({ title, description, children }) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <AppBar position="static" sx={classes.appbar}>
-          <Toolbar sx={classes.toolbar}>
+          <Toolbar>
             <Box display="flex" alignItems="center">
               <IconButton
                 edge="start"
@@ -155,54 +166,9 @@ export default function Layout({ title, description, children }) {
                 </Link>
               </NextLink>
             </Box>
-            <Drawer
-              anchor="left"
-              open={sidbarVisible}
-              onClose={sidebarCloseHandler}
-            >
-              <List>
-                <ListItem>
-                  <Box
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    <Typography>Shopping by category</Typography>
-                    <IconButton
-                      aria-label="close"
-                      onClick={sidebarCloseHandler}
-                    >
-                      <CancelIcon />
-                    </IconButton>
-                  </Box>
-                </ListItem>
-                <Divider light />
-                {categories.map((category) => (
-                  <NextLink
-                    key={category}
-                    href={`/search?category=${category}`}
-                    passHref
-                  >
-                    <ListItem
-                      button
-                      component="a"
-                      onClick={sidebarCloseHandler}
-                    >
-                      <ListItemText primary={category}></ListItemText>
-                    </ListItem>
-                  </NextLink>
-                ))}
-              </List>
-            </Drawer>
             <Box sx={isDesktop ? classes.visible : classes.hidden}>
               <form onSubmit={submitHandler}>
                 <Box sx={classes.searchForm}>
-                  <InputBase
-                    name="query"
-                    sx={classes.searchInput}
-                    placeholder="Search products"
-                    onChange={queryChangeHandler}
-                  />
                   <IconButton
                     type="submit"
                     sx={classes.searchButton}
@@ -210,15 +176,17 @@ export default function Layout({ title, description, children }) {
                   >
                     <SearchIcon />
                   </IconButton>
+                  <InputBase
+                    name="query"
+                    sx={classes.searchInput}
+                    placeholder="Search products"
+                    onChange={queryChangeHandler}
+                  />
                 </Box>
               </form>
             </Box>
-
-            <Box>
-              <Switch
-                checked={darkMode}
-                onChange={darkModeChangeHandler}
-              ></Switch>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: 'flex', gap: 2, }}>
               <NextLink href="/cart" passHref>
                 <Link>
                   <Typography component="span">
@@ -227,10 +195,10 @@ export default function Layout({ title, description, children }) {
                         color="secondary"
                         badgeContent={cart.cartItems.length}
                       >
-                        Cart
+                        <ShoppingCartIcon />
                       </Badge>
                     ) : (
-                      'Cart'
+                      <ShoppingCartIcon />
                     )}
                   </Typography>
                 </Link>
@@ -269,12 +237,108 @@ export default function Layout({ title, description, children }) {
                 </>
               ) : (
                 <NextLink href="/login" passHref>
-                  <Link>Login</Link>
+                  <Link><AccountCircleIcon /></Link>
                 </NextLink>
               )}
             </Box>
           </Toolbar>
         </AppBar>
+        <Drawer
+          anchor="left"
+          open={sidbarVisible}
+          onClose={sidebarCloseHandler}
+        >
+          <List>
+            <ListItem>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Typography sx={{ color: '#1a4d2e', fontWeight: 'bold', fontSize: 20, }}>GoMeal.</Typography>
+                <Box sx={{ flexGrow: 1, width: 80 }} />
+                <IconButton
+                  aria-label="close"
+                  onClick={sidebarCloseHandler}
+                >
+                  <CancelIcon />
+                </IconButton>
+              </Box>
+            </ListItem>
+            <Divider light />
+            <NextLink href="/" passHref>
+              <ListItem button
+                component="a"
+                onClick={sidebarCloseHandler}>
+                <ListItemIcon><DashboardIcon /></ListItemIcon>
+                <ListItemText>Dashboard</ListItemText>
+              </ListItem>
+            </NextLink>
+            <NextLink href="/cart" passHref>
+              <ListItem button
+                component="a"
+                onClick={sidebarCloseHandler}>
+                <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
+                <ListItemText>Cart</ListItemText>
+              </ListItem>
+            </NextLink>
+            {userInfo ? (
+              <NextLink href="/profile" passHref>
+                <ListItem button
+                  component="a"
+                  onClick={sidebarCloseHandler}>
+                  <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+                  <ListItemText>Profile</ListItemText>
+                </ListItem>
+              </NextLink>
+            ) : (
+              <NextLink href="/login" passHref>
+                <ListItem button
+                  component="a"
+                  onClick={sidebarCloseHandler}>
+                  <ListItemIcon><LoginIcon /></ListItemIcon>
+                  <ListItemText>Login</ListItemText>
+                </ListItem>
+              </NextLink>
+            )}
+            {userInfo ? (
+              <NextLink href="/" passHref>
+                <ListItem button
+                  component="a"
+                  onClick={() => {
+                    logoutClickHandler();
+                    sidebarCloseHandler();
+                  }}>
+                  <ListItemIcon><LogoutIcon /></ListItemIcon>
+                  <ListItemText>Logout</ListItemText>
+                </ListItem>
+              </NextLink>
+            ) : (
+              null
+            )}
+            {userInfo ? userInfo.isAdmin ? (
+              <NextLink href="/admin" passHref>
+                <ListItem button
+                  component="a"
+                  onClick={sidebarCloseHandler}>
+                  <ListItemIcon><LogoutIcon /></ListItemIcon>
+                  <ListItemText>Is Admin</ListItemText>
+                </ListItem>
+              </NextLink>
+            ) : (
+              <NextLink href="/" passHref>
+                <ListItem button
+                  component="a"
+                  onClick={sidebarCloseHandler}>
+                  <ListItemIcon><LogoutIcon /></ListItemIcon>
+                  <ListItemText>Is not Admin</ListItemText>
+                </ListItem>
+              </NextLink>
+            ) : (
+              null
+            )}
+          </List>
+        </Drawer>
         <Container component="main" sx={classes.main}>
           {children}
         </Container>
