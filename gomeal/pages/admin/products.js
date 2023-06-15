@@ -403,7 +403,7 @@ export default function Products() {
                                                             {item.category}
                                                         </TableCell>
                                                         <TableCell>
-                                                            {item.price}
+                                                            ${item.price}
                                                         </TableCell>
                                                         <TableCell>
                                                             {item.description}

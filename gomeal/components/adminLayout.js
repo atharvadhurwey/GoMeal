@@ -8,11 +8,8 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import NextLink from 'next/link';
 
 import { Link } from '@mui/material';
@@ -20,23 +17,24 @@ import { Link } from '@mui/material';
 import PeopleIcon from '@mui/icons-material/People';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import IconButton from '@mui/material/IconButton';
+import PieChartIcon from '@mui/icons-material/PieChart';
 import ClassIcon from '@mui/icons-material/Class';
-import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import TerrainIcon from '@mui/icons-material/Terrain';
+import BarChartIcon from '@mui/icons-material/BarChart';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { createTheme, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+import WebIcon from '@mui/icons-material/Web';
 
 import jsCookie from 'js-cookie';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { Store } from '../utils/Store';
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 
 import Head from "next/head";
-import classes from '../utils/classes';
 
 const MuiLink = styled(Link)({
     color: 'darkslategray',
@@ -139,6 +137,17 @@ export default function AdminLayout({ title, description, children }) {
                     anchor="left"
                 >
                     <Toolbar />
+                    <List>
+                        <NextLink href='/' passHref>
+                            <MuiLink>
+                                <ListItem button
+                                    component="a">
+                                    <ListItemIcon><WebIcon /></ListItemIcon>
+                                    <ListItemText>Back to Website</ListItemText>
+                                </ListItem>
+                            </MuiLink>
+                        </NextLink>
+                    </List>
                     <Divider />
                     <List>
                         <NextLink href='dashboard' passHref>
@@ -165,6 +174,36 @@ export default function AdminLayout({ title, description, children }) {
                                     component="a">
                                     <ListItemIcon><ClassIcon /></ListItemIcon>
                                     <ListItemText>Products</ListItemText>
+                                </ListItem>
+                            </MuiLink>
+                        </NextLink>
+                    </List>
+                    <Divider />
+                    <List>
+                        <NextLink href='barchart' passHref>
+                            <MuiLink>
+                                <ListItem button
+                                    component="a">
+                                    <ListItemIcon><BarChartIcon /></ListItemIcon>
+                                    <ListItemText>Bar Chart</ListItemText>
+                                </ListItem>
+                            </MuiLink>
+                        </NextLink>
+                        <NextLink href='piechart' passHref>
+                            <MuiLink>
+                                <ListItem button
+                                    component="a">
+                                    <ListItemIcon><PieChartIcon /></ListItemIcon>
+                                    <ListItemText>Pie Chart</ListItemText>
+                                </ListItem>
+                            </MuiLink>
+                        </NextLink>
+                        <NextLink href='geographychart' passHref>
+                            <MuiLink>
+                                <ListItem button
+                                    component="a">
+                                    <ListItemIcon><TerrainIcon /></ListItemIcon>
+                                    <ListItemText>Geography Chart</ListItemText>
                                 </ListItem>
                             </MuiLink>
                         </NextLink>
