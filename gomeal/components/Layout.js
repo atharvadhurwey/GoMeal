@@ -17,7 +17,6 @@ import {
   ListItemText,
   Menu,
   MenuItem,
-  Switch,
   ThemeProvider,
   Toolbar,
   Typography,
