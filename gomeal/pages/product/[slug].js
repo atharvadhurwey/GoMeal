@@ -89,7 +89,7 @@ export default function ProductScreen(props) {
           <Box sx={classes.section}>
             <NextLink href="/" passHref>
               <Link>
-                <Typography>back to result</Typography>
+                <Typography>Go Back</Typography>
               </Link>
             </NextLink>
           </Box>
@@ -99,29 +99,11 @@ export default function ProductScreen(props) {
                 src={urlFor(product.image)}
                 alt={product.name}
                 layout="responsive"
-                width={640}
-                height={640}
+                width={500}
+                height={300}
               />
             </Grid>
-            <Grid item md={3} xs={12}>
-              <List>
-                <ListItem>
-                  <Typography component="h1" variant="h1">
-                    {product.name}
-                  </Typography>
-                </ListItem>
-                <ListItem>Category: {product.category}</ListItem>
-                <ListItem>Brand: {product.brand}</ListItem>
-                <ListItem>
-                  <Rating value={product.rating} readOnly></Rating>
-                  <Typography sx={classes.smallText}>
-                    ({product.numReviews} reviews)
-                  </Typography>
-                </ListItem>
-                <ListItem>
-                  <Typography>Description: {product.description}</Typography>
-                </ListItem>
-              </List>
+            <Grid item md={2} xs={12}>
             </Grid>
             <Grid item md={3} xs={12}>
               <Card>
@@ -162,6 +144,27 @@ export default function ProductScreen(props) {
                 </List>
               </Card>
             </Grid>
+            <Grid item md={4} xs={12}>
+              <List>
+                <ListItem>
+                  <Typography component="h1" variant="h1">
+                    {product.name}
+                  </Typography>
+                </ListItem>
+                <ListItem>Category: {product.category}</ListItem>
+                <ListItem>Brand: {product.brand}</ListItem>
+                {/* <ListItem>
+                  <Rating value={product.rating} readOnly></Rating>
+                  <Typography sx={classes.smallText}>
+                    ({product.numReviews} reviews)
+                  </Typography>
+                </ListItem> */}
+                <ListItem>
+                  <Typography>Description: {product.description}</Typography>
+                </ListItem>
+              </List>
+            </Grid>
+
           </Grid>
         </Box>
       )}

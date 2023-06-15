@@ -18,7 +18,7 @@ handler.post(async (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password),
-        isAdmin: false,
+        isAdmin: req.body.isAdmin,
       },
     },
   ];
@@ -46,7 +46,7 @@ handler.post(async (req, res) => {
     _id: userId,
     name: req.body.name,
     email: req.body.email,
-    isAdmin: false,
+    isAdmin: req.body.isAdmin,
   };
   const token = signToken(user);
   res.send({ ...user, token });

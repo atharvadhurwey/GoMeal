@@ -45,6 +45,11 @@ const classes = {
   hidden: {
     display: 'none',
   },
+
+  link: {
+    underline: 'none',
+  },
+
   // search
 
   searchForm: {

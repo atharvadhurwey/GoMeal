@@ -39,6 +39,7 @@ export default function RegisterScreen() {
     const { enqueueSnackbar } = useSnackbar();
 
     const submitHandler = async ({ name, email, password, confirmPassword }) => {
+        const isAdmin = false;
         if (password !== confirmPassword) {
             enqueueSnackbar("Passwords don't match", { variant: 'error' });
             return;
@@ -48,6 +49,7 @@ export default function RegisterScreen() {
                 name,
                 email,
                 password,
+                isAdmin,
             });
             dispatch({ type: 'USER_LOGIN', payload: data });
             jsCookie.set('userInfo', JSON.stringify(data));
@@ -56,6 +58,7 @@ export default function RegisterScreen() {
             enqueueSnackbar(getError(err), { variant: 'error' });
         }
     };
+
     return (
         <Layout title="Register">
             <Form onSubmit={handleSubmit(submitHandler)}>

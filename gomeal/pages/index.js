@@ -58,7 +58,7 @@ export default function Home() {
     enqueueSnackbar(`${product.name} added to the cart`, {
       variant: 'success',
     });
-    router.push('/cart');
+    // router.push('/cart');
   };
 
   return (
@@ -68,7 +68,7 @@ export default function Home() {
       ) : error ? (
         <Alert variant="danger">{error}</Alert>
       ) : (
-        <Grid container spacing={3}>
+        <Grid container spacing={3} style={{justifyContent:'center'}}>
           {products.map((product) => (
             <Grid item md={4} key={product.slug}>
               <ProductItem

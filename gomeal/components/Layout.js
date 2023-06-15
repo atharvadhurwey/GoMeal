@@ -25,6 +25,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import CancelIcon from '@mui/icons-material/Cancel';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -187,6 +188,7 @@ export default function Layout({ title, description, children }) {
             </Box>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: 'flex', gap: 2, }}>
+
               <NextLink href="/cart" passHref>
                 <Link>
                   <Typography component="span">
@@ -232,6 +234,13 @@ export default function Layout({ title, description, children }) {
                     >
                       Order History
                     </MenuItem>
+                    {userInfo.isAdmin ? (<MenuItem
+                      onClick={(e) =>
+                        loginMenuCloseHandler(e, '/admin/dashboard')
+                      }
+                    >
+                      Admin Dashboard
+                    </MenuItem>) : null}
                     <MenuItem onClick={logoutClickHandler}>Logout</MenuItem>
                   </Menu>
                 </>
@@ -317,24 +326,15 @@ export default function Layout({ title, description, children }) {
               null
             )}
             {userInfo ? userInfo.isAdmin ? (
-              <NextLink href="/admin" passHref>
+              <NextLink href="/admin/dashboard" passHref>
                 <ListItem button
                   component="a"
                   onClick={sidebarCloseHandler}>
-                  <ListItemIcon><LogoutIcon /></ListItemIcon>
-                  <ListItemText>Is Admin</ListItemText>
+                  <ListItemIcon><AdminPanelSettingsIcon /></ListItemIcon>
+                  <ListItemText>Admin Dashboard</ListItemText>
                 </ListItem>
               </NextLink>
-            ) : (
-              <NextLink href="/" passHref>
-                <ListItem button
-                  component="a"
-                  onClick={sidebarCloseHandler}>
-                  <ListItemIcon><LogoutIcon /></ListItemIcon>
-                  <ListItemText>Is not Admin</ListItemText>
-                </ListItem>
-              </NextLink>
-            ) : (
+            ) : null : (
               null
             )}
           </List>
@@ -342,7 +342,7 @@ export default function Layout({ title, description, children }) {
         <Container component="main" sx={classes.main}>
           {children}
         </Container>
-        <Box component="footer" sx={classes.footer}>
+        <Box component="footer" sx={classes.footer} style={{ marginTop: 40, marginBottom: 20, }}>
           <Typography>All rights reserved. GoMeal.</Typography>
         </Box>
       </ThemeProvider>

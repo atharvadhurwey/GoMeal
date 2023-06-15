@@ -21,21 +21,22 @@ export default function ProductItem({ product, addToCartHandler }) {
             component="img"
             image={urlForThumbnail(product.image)}
             title={product.name}
+            style={{height:200}}
           ></CardMedia>
           <CardContent>
-            <Typography>{product.name}</Typography>
-            <Rating value={product.rating} readOnly></Rating>
+            <Typography style={{fontWeight:'bold'}}>{product.name}</Typography>
+            {/* <Rating value={product.rating} readOnly></Rating> */}
           </CardContent>
         </CardActionArea>
       </NextLink>
-      <CardActions>
+      <CardActions style={{display:'flex', justifyContent:'space-between'}}>
         <Typography>${product.price}</Typography>
         <Button
           size="small"
           color="primary"
           onClick={() => addToCartHandler(product)}
         >
-          Add to cart
+           Add to cart
         </Button>
       </CardActions>
     </Card>
